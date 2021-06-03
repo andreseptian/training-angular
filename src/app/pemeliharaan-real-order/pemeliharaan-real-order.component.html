@@ -1,0 +1,236 @@
+<p-cust-progress-spiner [blockedPage]="progressShow" [visible]="progressShow"></p-cust-progress-spiner>
+<p-toast [style]="{marginTop: '80px'}" [autoZIndex]="true" position="center" life="2000" [modal]="true"></p-toast>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="ui-g ui-fluid">
+  <div class="ui-g-12 ui-md-12 ui-lg-12" responsive="true">
+    <div class="ui-g-12 ui-lg-4">
+      <p-panel header="Detail Salesman" [style]="{'margin-bottom':'5px'}" scrollable="true" [toggleable]="true">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-3">
+            <span i18n="@@pilihSales">Pilih Sales</span>
+          </div>
+          <div class="ui-g-8">
+            <p-dropdown [options]="salesData" [(ngModel)]="selectedSales" [style]="{'width':'100%'}" [filter]="true"
+              (onChange)="onChangeSalesman(selectedSales)" placeholder="Choose Salesman"></p-dropdown>
+          </div>
+          <div class="ui-g-1">
+            <button icon="ui-icon-desktop-windows" class="orange-btn" pButton type="button"
+              (click)="formSearch()"></button>
+          </div>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-3">
+            <span i18n="@@tipeSales">Tipe Sales</span>
+          </div>
+          <div class="ui-g-9">
+            {{salesTipe}}
+          </div>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-3">
+            <span i18n="@@tglTransaksi">Tgl Transaksi</span>
+          </div>
+          <div class="ui-g-9">
+            {{transDate}}
+          </div>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-3">
+            <span i18n="@@team">Team</span>
+          </div>
+          <div class="ui-g-9">
+            {{team}}
+          </div>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-3">
+            <span i18n="@@gudang">Gudang</span>
+          </div>
+          <div class="ui-g-9">
+            {{gudang}}
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <div class="ui-g-12 ui-lg-8">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-2">
+          <button icon="ui-icon-plus" pButton type="button" label="New Order" (click)="addRealOrder()"></button>
+        </div>
+      </div>
+      <p-panel header="Real Order" [style]="{'margin-bottom':'5px'}" scrollable="true" [toggleable]="true">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-6">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-3">
+                <span i18n="@@realOrder">Real Order</span>
+              </div>
+              <div class="ui-g-4">
+                <p-dropdown [options]="orderData" [(ngModel)]="selectedOrderData" [style]="{'width':'100%'}"
+                  [filter]="true" (onChange)=" getRealOrder(selectedOrderData)" placeholder="Choose Real Order">
+                </p-dropdown>
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@nomorOrder2">Order No</span>
+              </div>
+              <div class="ui-g-3">
+                : {{orderno2}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-3">
+                <span i18n="@@tanggal">Tanggal</span>
+              </div>
+              <div class="ui-g-4">
+                : {{tanggalOrder}}
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@tanggalValidasi">Tgl Validasi</span>
+              </div>
+              <div class="ui-g-3">
+                : {{tanggalValidasi}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-3">
+                <span i18n="@@outlet">Outlet</span>
+              </div>
+              <div class="ui-g-9">
+                : {{outlet}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-3">
+                <span i18n="@@shipTo">Ship To</span>
+              </div>
+              <div class="ui-g-9">
+                : {{shipTo}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-3">
+                <span i18n="@@alasanReject">Reason Reject</span>
+              </div>
+              <div class="ui-g-9">
+                : {{reasonReject}}
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-6">
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-2">
+                <span i18n="@@noPo">No PO</span>
+              </div>
+              <div class="ui-g-4">
+                : {{noPo}}
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@pembayaran">Pembayaran</span>
+              </div>
+              <div class="ui-g-4">
+                : {{pembayaran}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-2">
+                <span i18n="@@tglPo">Tgl PO</span>
+              </div>
+              <div class="ui-g-4">
+                : {{tglPo}}
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@pembayaran">No Referensi</span>
+              </div>
+              <div class="ui-g-4">
+                : {{noReferensi}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-2">
+                <span i18n="@@noMobil">No Mobil</span>
+              </div>
+              <div class="ui-g-4">
+                : {{noMobil}}
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@statOutlet">Status Outlet</span>
+              </div>
+              <div class="ui-g-4">
+                : {{statOutlet}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-2">
+                <span i18n="@@keterangan">Keterangan</span>
+              </div>
+              <div class="ui-g-10">
+                : {{keterangan}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-2">
+                <span i18n="@@tipe">Tipe</span>
+              </div>
+              <div class="ui-g-4">
+                : {{tipe}}
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@tipeSales">Tipe Operasi</span>
+              </div>
+              <div class="ui-g-4">
+                : {{tipeOperation}}
+              </div>
+            </div>
+            <div class="ui-g ui-fluid">
+              <div class="ui-g-2">
+                <span i18n="@@tipe">Tactical</span>
+              </div>
+              <div class="ui-g-4">
+                : {{tactical}}
+              </div>
+              <div class="ui-g-2">
+                <span i18n="@@tipeSales">COD</span>
+              </div>
+              <div class="ui-g-4">
+                : {{cod}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+  <div class="ui-g-12 ui-md-12 ui-lg-12" responsive="true">
+    <p-panel header="Detail Real Order" [style]="{'margin-bottom':'5px'}" scrollable="true" [toggleable]="true">
+      <div class="ui-g ui-fluid">
+        <div class="ui-g-10"></div>
+        <div class="ui-g-2">
+          <button icon="ui-icon-plus" class="green-btn" pButton type="button" label="ADD"
+            (click)="addProduct()"></button>
+        </div>
+      </div>
+      <wj-flex-grid #flexGrid [itemsSource]="dataRealOrder" style="height: 500px;" [isReadOnly]="true">
+        <wj-flex-grid-filter #Filter></wj-flex-grid-filter>
+        <wj-flex-grid-column header="" [width]="50">
+          <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+            <button icon="ui-icon-delete" class="red-btn" pButton type="button"
+              (click)="deleteSnop(cell, selectedAp)"></button>
+          </ng-template>
+        </wj-flex-grid-column>
+        <wj-flex-grid-column header="Pcode" binding="pcode" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Nama Produk" binding="pcodeName" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Harga Besar" binding="sellPrice1" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Harga Tengah" binding="sellPrice2" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Qty" binding="xQty" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Total" binding="amount" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Original Qty" binding="orgQty" width="*"></wj-flex-grid-column>
+        <wj-flex-grid-column header="Original Amount" binding="orgAmount" width="*"></wj-flex-grid-column>
+      </wj-flex-grid>
+    </p-panel>
+  </div>
+  <!-- Tanggal Update Source Front End dan Back End -->
+  <div class="ui-g-12 ui-md-12 ui-lg-12" responsive="true" style="color: brown; text-align: right;">
+    Front End: 21 July 2020 <br />
+    Back End: {{updDateModule}} <br />
+  </div>
+</div>

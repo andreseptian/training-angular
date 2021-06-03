@@ -1,0 +1,15 @@
+<div class="ui-g">
+    <div class="ui-g-12">
+      <p-card header="Wijmo Sample Page">
+        <div class="ui-g">
+          <div class="ui-g-4">
+              <wj-calendar #theCalendar>
+              </wj-calendar>
+          </div>
+        </div>
+        <div>
+            The current date is <b>{{ theCalendar.value | date:'fullDate'}}</b>.
+        </div>
+      </p-card>
+    </div>
+  </div>

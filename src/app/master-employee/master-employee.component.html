@@ -1,13 +1,95 @@
-<div class="ui-g-12">
-    <p-panel header="Title" [toggleable]="true">
-        <h3>Cari nama employee</h3>
-        <span class="ui-float-label">
-            <input id="float-input" type="text" [(ngModel)]="userid" size="30" pInputText />
-            <label for="float-input">employee Id</label>
-        </span>
-        <p-button (click)="onClick(userid)" icon="pi pi-check" label="Cari"></p-button>
-        <div class="ui-g ui-fluid">
-            <h1>Nama Employee : {{ nameUser }}</h1>
+<p-cust-progress-spiner [blockedPage]="progressShow" [visible]="progressShow"></p-cust-progress-spiner>
+<!-- <p-toast [style]="{marginTop: '80px'}" [autoZIndex]="true" position="center" life="2000" [modal]="true"></p-toast> -->
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<p-panel header="Title" [toggleable]="true">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-6 ui-">
+            <p-panel header="Get Employee" [toggleable]="true">
+                <div class="ui-g ui-fluid">
+                    <div class="ui-g-3">
+                        Job Title :
+                    </div>
+                    <div class="ui-g-9">
+                        <p-dropdown [filter]="true" [options]="jobTitle" [(ngModel)]="selectJobTitle"
+                            placeholder="Select a Job Title" (onChange)="onChangeJobTitle(selectJobTitle)">
+                        </p-dropdown>
+                    </div>
+                    <div class="ui-g-3">
+                        List Employee :
+                    </div>
+                    <div class="ui-g-9">
+                        <p-multiSelect [options]="employee" [(ngModel)]="selectedEmployee"></p-multiSelect>
+                    </div>
+                </div>
+            </p-panel>
         </div>
-    </p-panel>
-</div>
+        <div class="ui-g-6"></div>
+        <div class="ui-g-6">
+            <button pButton type="button" label="Primary" (click)="getData()"></button>
+        </div>
+        <div class="ui-g-6">
+            <button pButton type="button" label="Secondary" class="ui-button-secondary"></button>
+        </div>
+    </div>
+</p-panel>
+
+<p-panel header="Wijmo Table" [toggleable]="true">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-12">
+            <wj-flex-grid #flexGrid [itemsSource]="dataEmployee">
+                <wj-flex-grid-filter #Filter></wj-flex-grid-filter>
+                <wj-flex-grid-column header="" [width]="50">
+                    <ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
+                        {{cell.row.index + 1}}
+                    </ng-template>
+                </wj-flex-grid-column>
+                <wj-flex-grid-column header="SS ID" binding="ssId" [width]="100" [isReadOnly]="true">
+                </wj-flex-grid-column>
+                <wj-flex-grid-column header="SS Name" binding="ssName" [width]="300"></wj-flex-grid-column>
+                <wj-flex-grid-column header="SS Job Title" binding="ssJobTitle" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="RSM ID" binding="rsmId" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="RSM Name" binding="rsmName" [width]="300"></wj-flex-grid-column>
+                <wj-flex-grid-column header="RSM Job Title" binding="rsmJobTitle" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="GRSM ID" binding="grsmId" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="GRSM Name" binding="grsmName" [width]="300"></wj-flex-grid-column>
+                <wj-flex-grid-column header="GRSM Job Title" binding="grsmJobTitle" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="NSM ID" binding="nsmId" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="NSM Name" binding="nsmName" [width]="300"></wj-flex-grid-column>
+                <wj-flex-grid-column header="NSM Job Title" binding="nsmJobTitle" [width]="100"></wj-flex-grid-column>
+                <wj-flex-grid-column header="Action">
+                    <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                        <button icon="ui-icon-delete" class="red-btn" pButton type="button"
+                            (click)="delete(cell.item.ssId)"></button>
+                    </ng-template>
+                </wj-flex-grid-column>
+            </wj-flex-grid>
+        </div>
+        <div class="ui-ug ui-fluid">
+            <div class="ui-g-6">
+                <button pButton type="button" label="Save" class="ui-button-rounded" (click)="saveData()"></button>
+            </div>
+        </div>
+    </div>
+</p-panel>
+
+<p-panel header="Title" [toggleable]="true">
+    <div class="ui-g ui-fluid">
+        <div class="ui-g-6">
+            <p-panel header="Get Employee" [toggleable]="true">
+                <div class="ui-g ui-fluid">
+                    Cari nama employee :
+                    <span class="ui-float-label">
+                        <input id="float-input" type="text" [(ngModel)]="userid" size="30" pInputText />
+                        <label for="float-input">employee Id</label>
+                    </span>
+                    <p-button (click)="onClick(userid)" icon="pi pi-check" label="Cari"></p-button>
+                    <div class="ui-g ui-fluid">
+                        <h3>Nama Employee : {{ nameUser }}</h3>
+                    </div>
+                </div>
+            </p-panel>
+        </div>
+    </div>
+</p-panel>

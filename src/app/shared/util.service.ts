@@ -263,4 +263,13 @@ export class UtilService {
     );
   }
 
+  getListJobTitle(): any{
+    return [
+      {label: 'SS', value: '1'},
+      {label: 'RSM', value: '2'},
+      {label: 'GRSM', value: '3'},
+      {label: 'NSM', value: '4'},
+    ]
+  }
+
 }

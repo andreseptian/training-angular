@@ -1,0 +1,89 @@
+<p-cust-progress-spiner [blockedPage]="progressShow" [visible]="progressShow"></p-cust-progress-spiner>
+<!-- <p-toast [style]="{marginTop: '80px'}" [autoZIndex]="true" position="center" life="2000" [modal]="true"></p-toast> -->
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<p-panel header="Master Barang" [toggleable]="true">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-5">
+      <p-panel header="Input Barang" [toggleable]="true">
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-3">
+            Pcode :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode">
+              <span id="pcode">{{pcode}}</span>
+            </span>
+          </div>
+          <div class="ui-g-3">
+            Name :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode_name">
+              <span id="pcode_name">{{pcode_name}}</span>
+            </span>
+          </div>
+          <div class="ui-g-3">
+            Price :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="price">
+              <span id="price">{{price}}</span>
+            </span>
+          </div>
+          <div class="ui-g-3">
+            Stock :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="stock">
+              <span id="stock">{{stock}}</span>
+            </span>
+          </div>
+          <div class="ui-g-6">
+            <button pButton type="button" label="Add Barang" (click)="addBarang()"></button>
+          </div>
+          <div class="ui-g-6">
+            <button pButton type="button" label="Clear" class="ui-button-secondary"></button>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+    <div class="ui-g-12">
+      <p-panel header="Data Barang" [toggleable]="true">
+        <div class="ui-g ui-fluid">
+          <wj-flex-grid #flexGrid [itemsSource]="dataBarang">
+            <wj-flex-grid-filter #Filter></wj-flex-grid-filter>
+            <ng-template wjFlexGridCellTemplate [cellType]="'RowHeader'" let-cell="cell">
+              {{cell.row.index + 1}}
+            </ng-template>
+
+            <wj-flex-grid-column header="Pcode " binding="pcode" [width]="100" [isReadOnly]="true">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column header="Pcode Name" binding="pcode_name" [width]="300"></wj-flex-grid-column>
+            <wj-flex-grid-column header="Price" binding="price" [width]="300"></wj-flex-grid-column>
+            <wj-flex-grid-column header="Stock" binding="stock" [width]="300"></wj-flex-grid-column>
+            <wj-flex-grid-column header="Action" [width]="205">
+              <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                <button icon="ui-icon-delete" class="red-btn" pButton type="button"
+                  (click)="delete(cell.item.pcode)"></button>
+              </ng-template>
+            </wj-flex-grid-column>
+          </wj-flex-grid>
+        </div>
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-6">
+            <button pButton type="button" label="Save" (click)="getData()"></button>
+          </div>
+          <div class="ui-g-6">
+            <button pButton type="button" label="Clear" class="ui-button-secondary"></button>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+</p-panel>

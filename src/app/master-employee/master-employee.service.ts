@@ -65,7 +65,7 @@ export class MasterEmployeeService {
   updateEmployee(dataEmp: any[], empId: string): Observable<any> {
     this.URL = this.employeeUrl + "/save/" + empId;
     
-    return this.http.save(this.URL).pipe(
+     return this.http.delete(this.URL).pipe(
       catchError(this.handleError)
     );
   }

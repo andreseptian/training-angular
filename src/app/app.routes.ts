@@ -19,7 +19,8 @@ export const routes: Routes = [
             { path: 'lazy-loading', loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule) },
             { path: 'wijmo-sample', loadChildren: () => import('./wijmo-sample/wijmo-sample.module').then(m => m.WijmoSampleModule) },
             { path: 'real-order', loadChildren: () => import('./pemeliharaan-real-order/pemeliharaan-real-order.module').then(m => m.PemeliharaanRealOrderModule) },
-            { path: 'master-employee', loadChildren: () => import('./master-employee/master-employee.module').then(m => m.MasterEmployeeModule) }
+            { path: 'master-employee', loadChildren: () => import('./master-employee/master-employee.module').then(m => m.MasterEmployeeModule) },
+            { path: 'master-barang', loadChildren: () => import('./master-barang/master-barang.module').then(m => m.MasterBarangModule) }
         ]
     },
     {path: '404', component: AppNotfoundComponent},

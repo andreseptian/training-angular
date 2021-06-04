@@ -29,7 +29,8 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Master Data', icon: 'menu',
                 items: [
-                    {label: 'Master Employee', icon: 'supervisor_account', routerLink: ['/master-employee']}
+                    { label: 'Master Employee', icon: 'supervisor_account', routerLink: ['/master-employee'] },
+                    {label: 'Master Barang', icon: 'supervisor_account', routerLink: ['/master-barang']}
                 ]              
             }
         ];

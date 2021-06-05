@@ -4,50 +4,122 @@
 <p-confirmDialog></p-confirmDialog>
 
 <p-panel header="Master Barang" [toggleable]="true">
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-5">
-      <p-panel header="Input Barang" [toggleable]="true">
-        <div class="ui-g ui-fluid">
-          <div class="ui-g-3">
-            Pcode :
+  <form [formGroup]="userform" (ngSubmit)="addBarang(userform.value)">
+    <p-panel header="Input Barang">
+      <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Pcode *:
           </div>
-          <div class="ui-g-9">
-            <span class="ui-float-label">
-              <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode">
-            </span>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="pcode" placeholder="Required" [(ngModel)]="pcode" />
           </div>
-          <div class="ui-g-3">
-            Name :
-          </div>
-          <div class="ui-g-9">
-            <span class="ui-float-label">
-              <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode_name">
-            </span>
-          </div>
-          <div class="ui-g-3">
-            Price :
-          </div>
-          <div class="ui-g-9">
-            <span class="ui-float-label">
-              <input id="input" type="text" size="30" pInputText [(ngModel)]="price">
-            </span>
-          </div>
-          <div class="ui-g-3">
-            Stock :
-          </div>
-          <div class="ui-g-9">
-            <span class="ui-float-label">
-              <input id="input" type="text" size="30" pInputText [(ngModel)]="stock">
-            </span>
-          </div>
-          <div class="ui-g-6">
-            <button pButton type="button" label="Add Barang" (click)="addBarang()"></button>
-          </div>
-          <div class="ui-g-6">
-            <button pButton type="button" label="Clear" class="ui-button-secondary"></button>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="pcode is required"
+              *ngIf="!userform.controls['pcode'].valid&&userform.controls['pcode'].dirty"></p-message>
           </div>
         </div>
-      </p-panel>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Pcode Name *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="text" formControlName="pcode_name" placeholder="Required"
+              [(ngModel)]="pcode_name" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="pcode_name is required"
+              *ngIf="!userform.controls['pcode_name'].valid&&userform.controls['pcode_name'].dirty"></p-message>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Price *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText type="number" formControlName="price" placeholder="Required" [(ngModel)]="price" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="price is required"
+              *ngIf="!userform.controls['price'].valid&&userform.controls['price'].dirty"></p-message>
+          </div>
+        </div>
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2">
+            Stock *:
+          </div>
+          <div class="ui-grid-col-6">
+            <input pInputText minValue="0" decimalPlaces="0" type="number" formControlName="stock"
+              placeholder="Required" [(ngModel)]="stock" />
+          </div>
+          <div class="ui-grid-col-4">
+            <p-message severity="error" text="stock is required"
+              *ngIf="!userform.controls['stock'].valid&&userform.controls['stock'].dirty"></p-message>
+          </div>
+        </div>
+
+        <div class="ui-grid-row">
+          <div class="ui-grid-col-2"></div>
+          <div class="ui-grid-col-6">
+            <button pButton type="submit" label="Submit" [disabled]="!userform.valid"></button>
+          </div>
+          <div class="ui-grid-col-4"></div>
+        </div>
+        <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+          Form Submitted
+          <br>
+          {{diagnostic}}
+        </div>
+      </div>
+    </p-panel>
+  </form>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-5">
+      <!-- <p-panel header="Input Barang" [toggleable]="true">
+        <div class="ui-g ui-fluid">
+          <form novalidate class="simple-form">
+            <div class="ui-g-3">
+              Pcode :
+            </div>
+            <div class="ui-g-9">
+              <span class="ui-float-label">
+                <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode" required>
+              </span>
+            </div>
+            <div class="ui-g-3">
+              Name :
+            </div>
+            <div class="ui-g-9">
+              <span class="ui-float-label">
+                <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode_name" required>
+              </span>
+            </div>
+            <div class="ui-g-3">
+              Price :
+            </div>
+            <div class="ui-g-9">
+              <span class="ui-float-label">
+                <input id="input" type="text" size="30" pInputText [(ngModel)]="price" required>
+              </span>
+            </div>
+            <div class="ui-g-3">
+              Stock :
+            </div>
+            <div class="ui-g-9">
+              <span class="ui-float-label">
+                <input id="input" type="text" size="30" pInputText [(ngModel)]="stock" required>
+              </span>
+            </div>
+            <div class="ui-g-6">
+              <button pButton type="submit" label="Add Barang" (click)="addBarang()"></button>
+            </div>
+            <div class="ui-g-6">
+              <button pButton type="button" ng-click="reset()" value="Reset" label="Clear"
+                class="ui-button-secondary"></button>
+            </div>
+          </form>
+        </div>
+      </p-panel> -->
     </div>
     <div class="ui-g-12">
       <p-panel header="Data Barang" [toggleable]="true">

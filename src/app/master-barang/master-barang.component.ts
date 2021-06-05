@@ -20,7 +20,11 @@ export class MasterBarangComponent implements OnInit {
 
 
     //Variable Data
-  dataBarang:any[] = [];
+  dataBarang: any[] = [];
+  pcode: string;
+  pcode_name: string;
+  price: string;
+  stock: string;
 
   progressShow: boolean = false;
 
@@ -55,6 +59,65 @@ export class MasterBarangComponent implements OnInit {
         this.progressShow = false;
       }
     );
+  }
+
+  deleteBarang(pcode: string, stock: string, stk: number=+stock){
+    this.confirmationService.confirm({
+      message: 'Are You Sure Want to Delete ?',
+      header: 'Delete Confirmation',
+      icon: 'ui-icon-warning',
+      accept:()=>{
+        this.progressShow = true;
+        this.masterBarangService.deleteBarangByPcode(pcode).subscribe(
+          (data) => {
+             if (stk >= 0) {
+               this.messageService.add({ severity: 'success', summary: 'Delete barang berhasil' });
+            } else {
+               this.messageService.add({ severity: 'error', summary: 'Stock Masih ada' });
+               this.progressShow = false;
+            }
+            this.dataBarang = data;
+          },
+          (error) => {
+            this.messageService.add({ severity: 'error', summary: 'Error Delete data Barang' });   
+            this.progressShow = false;
+          },
+          () =>{
+            this.progressShow = false;
+          }
+        );
+      }
+    });
+  }
+
+  addBarang() {
+    this.confirmationService.confirm({
+      message: 'Are You Sure Want to Add ?',
+      header: 'Add Confirmation',
+      icon: 'ui-icon-warning',
+      accept:()=>{
+        this.progressShow = true;
+        this.masterBarangService.insertBarang(this.pcode, this.pcode_name, this.price, this.stock).subscribe(
+          () => {
+            this.getDataBarang();
+            this.messageService.add({ severity: 'success', summary: 'Success Add Barang' });
+          },
+          (error)=>{     
+            if (error.status == 500) {
+              this.messageService.add({ severity: 'error', summary: 'pcode sudah ada' });
+              this.messageService.add({ severity: 'error', summary: 'Error Delete data Barang' });
+              this.progressShow = false;
+            } else {
+              this.messageService.add({ severity: 'error', summary: 'Error Delete data Barang' });
+              this.progressShow = false;
+            }
+          },
+          () => {
+            this.progressShow = false;
+          }
+        );
+      }
+    });
   }
 
 }

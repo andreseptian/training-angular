@@ -33,4 +33,29 @@ export class MasterBarangService {
     );
   }
 
+  deleteBarangByPcode(pcode: string): Observable<any>{
+    this.URL = this.employeeUrl + "/delete/"+pcode;
+
+    return this.http.delete(this.URL).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+
+  insertBarang(pcode: string, pcode_name:string, price: string, stock: string): Observable<any>{
+    this.URL = this.employeeUrl + "/insert?pcode=" + pcode + "&pcodeName=" + pcode_name + "&price=" + price + "&stock=" + stock;
+
+    return this.http.post(this.URL, pcode).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateBarang(dataBrg: any[]): Observable<any>{
+    this.URL = this.employeeUrl + "/updateAll";
+
+    return this.http.put(this.URL, dataBrg).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 }

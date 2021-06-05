@@ -14,7 +14,6 @@
           <div class="ui-g-9">
             <span class="ui-float-label">
               <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode">
-              <span id="pcode">{{pcode}}</span>
             </span>
           </div>
           <div class="ui-g-3">
@@ -23,7 +22,6 @@
           <div class="ui-g-9">
             <span class="ui-float-label">
               <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode_name">
-              <span id="pcode_name">{{pcode_name}}</span>
             </span>
           </div>
           <div class="ui-g-3">
@@ -32,7 +30,6 @@
           <div class="ui-g-9">
             <span class="ui-float-label">
               <input id="input" type="text" size="30" pInputText [(ngModel)]="price">
-              <span id="price">{{price}}</span>
             </span>
           </div>
           <div class="ui-g-3">
@@ -41,7 +38,6 @@
           <div class="ui-g-9">
             <span class="ui-float-label">
               <input id="input" type="text" size="30" pInputText [(ngModel)]="stock">
-              <span id="stock">{{stock}}</span>
             </span>
           </div>
           <div class="ui-g-6">
@@ -67,17 +63,17 @@
             <wj-flex-grid-column header="Pcode Name" binding="pcode_name" [width]="300"></wj-flex-grid-column>
             <wj-flex-grid-column header="Price" binding="price" [width]="300"></wj-flex-grid-column>
             <wj-flex-grid-column header="Stock" binding="stock" [width]="300"></wj-flex-grid-column>
-            <wj-flex-grid-column header="Action" [width]="205">
+            <wj-flex-grid-column header="Action" [width]="205" [isReadOnly]="true">
               <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
                 <button icon="ui-icon-delete" class="red-btn" pButton type="button"
-                  (click)="delete(cell.item.pcode)"></button>
+                  (click)="deleteBarang(cell.item.pcode)"></button>
               </ng-template>
             </wj-flex-grid-column>
           </wj-flex-grid>
         </div>
         <div class="ui-g ui-fluid">
           <div class="ui-g-6">
-            <button pButton type="button" label="Save" (click)="getData()"></button>
+            <button pButton type="button" label="Save" (click)="updateData()"></button>
           </div>
           <div class="ui-g-6">
             <button pButton type="button" label="Clear" class="ui-button-secondary"></button>

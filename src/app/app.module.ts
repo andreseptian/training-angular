@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, enableProdMode } from '@angular/core';
  import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routes';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppComponent} from './app.component';
 import { AppMainComponent } from './app.main.component';
@@ -28,16 +29,21 @@ import { XkeyService } from './shared/xkey.service';
 import { NotificationService } from './shared/notification.service';
 import { AuthService } from './auth/auth.service';
 
+import { WjGridModule } from '@grapecity/wijmo.angular2.grid';
+import { InputDate, InputTime, ComboBox, AutoComplete, InputNumber, InputColor } from '@grapecity/wijmo.input';
+import { CollectionView, DateTime } from '@grapecity/wijmo';
+
 
 @NgModule({
     imports: [
+        WjGridModule,
+        WjInputModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutes,
         HttpClientModule,
         BrowserAnimationsModule,
-        WjInputModule,
         AppSharedModule
     ],
     declarations: [
@@ -59,6 +65,9 @@ import { AuthService } from './auth/auth.service';
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         BreadcrumbService, AuthService, UtilService, XkeyService, NotificationService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule { }
+
+enableProdMode();
+platformBrowserDynamic().bootstrapModule(AppModule);

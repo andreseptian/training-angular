@@ -12,7 +12,8 @@
             Pcode *:
           </div>
           <div class="ui-grid-col-6">
-            <input pInputText type="text" formControlName="pcode" placeholder="Required" [(ngModel)]="pcode" />
+            <input id="pcode" pInputText type="text" formControlName="pcode" placeholder="Required"
+              [(ngModel)]="pcode" />
           </div>
           <div class="ui-grid-col-4">
             <p-message severity="error" text="pcode is required"
@@ -24,7 +25,7 @@
             Pcode Name *:
           </div>
           <div class="ui-grid-col-6">
-            <input pInputText type="text" formControlName="pcode_name" placeholder="Required"
+            <input id="pcode_name" pInputText type="text" formControlName="pcode_name" placeholder="Required"
               [(ngModel)]="pcode_name" />
           </div>
           <div class="ui-grid-col-4">
@@ -37,7 +38,8 @@
             Price *:
           </div>
           <div class="ui-grid-col-6">
-            <input pInputText type="number" formControlName="price" placeholder="Required" [(ngModel)]="price" />
+            <input id="price" pInputText type="number" formControlName="price" placeholder="Required"
+              [(ngModel)]="price" />
           </div>
           <div class="ui-grid-col-4">
             <p-message severity="error" text="price is required"
@@ -49,7 +51,7 @@
             Stock *:
           </div>
           <div class="ui-grid-col-6">
-            <input pInputText minValue="0" decimalPlaces="0" type="number" formControlName="stock"
+            <input id="stock" pInputText minValue="0" decimalPlaces="0" type="number" formControlName="stock"
               placeholder="Required" [(ngModel)]="stock" />
           </div>
           <div class="ui-grid-col-4">
@@ -65,11 +67,6 @@
           </div>
           <div class="ui-grid-col-4"></div>
         </div>
-        <div style="text-align:center;margin-top:20px" *ngIf="submitted">
-          Form Submitted
-          <br>
-          {{diagnostic}}
-        </div>
       </div>
     </p-panel>
   </form>
@@ -77,47 +74,46 @@
     <div class="ui-g-5">
       <!-- <p-panel header="Input Barang" [toggleable]="true">
         <div class="ui-g ui-fluid">
-          <form novalidate class="simple-form">
-            <div class="ui-g-3">
-              Pcode :
-            </div>
-            <div class="ui-g-9">
-              <span class="ui-float-label">
-                <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode" required>
-              </span>
-            </div>
-            <div class="ui-g-3">
-              Name :
-            </div>
-            <div class="ui-g-9">
-              <span class="ui-float-label">
-                <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode_name" required>
-              </span>
-            </div>
-            <div class="ui-g-3">
-              Price :
-            </div>
-            <div class="ui-g-9">
-              <span class="ui-float-label">
-                <input id="input" type="text" size="30" pInputText [(ngModel)]="price" required>
-              </span>
-            </div>
-            <div class="ui-g-3">
-              Stock :
-            </div>
-            <div class="ui-g-9">
-              <span class="ui-float-label">
-                <input id="input" type="text" size="30" pInputText [(ngModel)]="stock" required>
-              </span>
-            </div>
-            <div class="ui-g-6">
-              <button pButton type="submit" label="Add Barang" (click)="addBarang()"></button>
-            </div>
-            <div class="ui-g-6">
-              <button pButton type="button" ng-click="reset()" value="Reset" label="Clear"
-                class="ui-button-secondary"></button>
-            </div>
-          </form>
+          <div class="ui-g-3">
+            Pcode :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode" required>
+            </span>
+          </div>
+          <div class="ui-g-3">
+            Name :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="pcode_name" required>
+            </span>
+          </div>
+          <div class="ui-g-3">
+            Price :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="price" required>
+            </span>
+          </div>
+          <div class="ui-g-3">
+            Stock :
+          </div>
+          <div class="ui-g-9">
+            <span class="ui-float-label">
+              <input id="input" type="text" size="30" pInputText [(ngModel)]="stock" required>
+            </span>
+          </div>
+          <div class="ui-g-6">
+            <button pButton type="submit" label="Add Barang" (click)="addBarang()"></button>
+          </div>
+          <div class="ui-g-6">
+            <button pButton type="button" ng-click="reset()" value="Reset" label="Clear"
+              class="ui-button-secondary"></button>
+          </div>
+
         </div>
       </p-panel> -->
     </div>
@@ -133,15 +129,22 @@
             <wj-flex-grid-column header="Pcode " binding="pcode" [width]="100" [isReadOnly]="true">
             </wj-flex-grid-column>
             <wj-flex-grid-column header="Pcode Name" binding="pcode_name" [width]="300"></wj-flex-grid-column>
-            <wj-flex-grid-column header="Price" binding="price" [width]="300"></wj-flex-grid-column>
-            <wj-flex-grid-column header="Stock" binding="stock" [width]="300"></wj-flex-grid-column>
+            <wj-flex-grid-column header="Price" binding="price" [dataType]="'Number'" [width]="300">
+            </wj-flex-grid-column>
+            <wj-flex-grid-column header="Stock" binding="stock" [dataType]="'Number'" [width]="300">
+            </wj-flex-grid-column>
             <wj-flex-grid-column header="Action" [width]="205" [isReadOnly]="true">
               <ng-template wjFlexGridCellTemplate [cellType]="'Cell'" let-cell="cell">
+                <button pButton type="button" icon="ui-icon-update" class="blue-btn"
+                  (click)="updateData(cell.item.stock)"></button>
+                &nbsp;
                 <button icon="ui-icon-delete" class="red-btn" pButton type="button"
-                  (click)="deleteBarang(cell.item.pcode)"></button>
+                  (click)="deleteBarang(cell.item.pcode, cell.item.stock)"></button>
               </ng-template>
             </wj-flex-grid-column>
           </wj-flex-grid>
+          <wj-input-number #theInputNumber format="n0" [step]="1" [min]="0" [max]="10000">
+          </wj-input-number>
         </div>
         <div class="ui-g ui-fluid">
           <div class="ui-g-6">

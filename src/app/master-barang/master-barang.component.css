@@ -1,0 +1,82 @@
+body {
+    margin-bottom: 24px;
+}
+
+.wj-flexgrid {
+    height: 300px;
+    margin-bottom: 12px;
+}
+
+.wj-flexgrid .wj-cell {
+    padding: 6px 8px;
+}
+
+.colorbox {
+    display: inline-block;
+    width: 12px;
+    height: 1.5em;
+    margin: 0 3px 0 -3px;
+    border: 1px solid black;
+    vertical-align: bottom;
+}
+
+/* switch-style checkbox */
+.wj-cell.switch input[type="checkbox"] {
+    opacity: 0;
+    width: 100%;
+}
+
+.wj-cell.switch label {
+    width: 3em;
+    position: relative;
+}
+
+.wj-cell.switch input[type="checkbox"] + span {
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.wj-cell.switch input[type="checkbox"]:checked + span {
+    background: #0085c7; /* rgb(27, 255, 27) */
+}
+
+.wj-cell.switch:hover input[type="checkbox"] + span:after {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s;
+}
+
+.wj-cell.switch input[type="checkbox"] + span:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0.45em;
+    width: 2.5em;
+    height: 0.75em;
+    border-radius: 1em;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0.25;
+}
+
+.wj-cell.switch input[type="checkbox"]:checked + span:before {
+    background: inherit;
+}
+
+.wj-cell.switch input[type="checkbox"] + span:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.13em;
+    width: 1.3em;
+    height: 1.3em;
+    background: white;
+    border-radius: 1em;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.wj-cell.switch input[type="checkbox"]:checked + span:after {
+    left: 1.25em;
+    transition: all 0.3s;
+    background: inherit;
+}

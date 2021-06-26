@@ -15,6 +15,8 @@ import { CollectionView, DateTime} from '@grapecity/wijmo'
 
 import { InputDate, InputTime, ComboBox, AutoComplete, InputNumber, InputColor } from '@grapecity/wijmo.input';
 
+import * as wjcGrid from '@grapecity/wijmo.grid';
+
 
 
 @Component({
@@ -194,5 +196,20 @@ export class MasterBarangComponent implements OnInit {
     //     }
 
   }
+  logText: string = 'please select a range on the grid';
+  flexInitialized(flexgrid: wjcGrid.FlexGrid) {
+        flexgrid.cellEditEnding.addHandler((s: wjcGrid.FlexGrid, e: wjcGrid.CellEditEndingEventArgs) => {
+            this.logText = '';
+            let col = s.columns[e.col];
+            if (col.binding == 'stock' || col.binding == 'price') {
+                let value = wjcCore.changeType(s.activeEditor.value, wjcCore.DataType.Number, col.format);
+                if (!wjcCore.isNumber(value) || value < 0) { // prevent negative sales/expenses
+                    e.cancel = true;
+                  this.logText = 'Please enter a positive amount';
+                  this.messageService.add({ severity: 'error', summary: 'Data tidak boleh minus' });
+                }
+            }
+        });
+    }
 
 }

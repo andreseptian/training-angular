@@ -29,15 +29,10 @@ import { XkeyService } from './shared/xkey.service';
 import { NotificationService } from './shared/notification.service';
 import { AuthService } from './auth/auth.service';
 
-import { WjGridModule } from '@grapecity/wijmo.angular2.grid';
-import { InputDate, InputTime, ComboBox, AutoComplete, InputNumber, InputColor } from '@grapecity/wijmo.input';
-import { CollectionView, DateTime } from '@grapecity/wijmo';
 
 
 @NgModule({
     imports: [
-        WjGridModule,
-        WjInputModule,
         BrowserModule,
         FormsModule,
         ReactiveFormsModule,
@@ -68,6 +63,3 @@ import { CollectionView, DateTime } from '@grapecity/wijmo';
     bootstrap: [AppComponent],
 })
 export class AppModule { }
-
-enableProdMode();
-platformBrowserDynamic().bootstrapModule(AppModule);
